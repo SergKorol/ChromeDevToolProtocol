@@ -1,24 +1,19 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace CdpSample;
 
-public class CdpResponse
+public record CdpResponse
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("result")]
-    public ResultWrapper? Result { get; set; }
-
-    public class ResultWrapper
+    public ResponseResult? Result { get; set; }
+    
+    public record ResponseResult
     {
         [JsonPropertyName("result")]
-        public InnerResult? HtmlResult { get; set; }
-    }
-
-    public class InnerResult
-    {
-        [JsonPropertyName("value")]
-        public string? Value { get; set; }
+        public JsonElement? ResultValue { get; set; }
     }
 }
